@@ -281,6 +281,12 @@ namespace Emby.Plugin.Danmu.Scraper.Bilibili
 
                         foreach (var ep in episodesToProcess)
                         {
+                            // 跳过某些集
+                            if (id == 33378 && ep.Title == "SP")
+                            {
+                                log.Info($"Bilibili.GetMedia (Season ID: {id}): 跳过此剧集。ep_id: {ep.Id}, 标题: '{ep.Title}', CID: {ep.CId}, AID: {ep.AId}");
+                                continue;
+                            }
                             log.Info($"Bilibili.GetMedia (Season ID: {id}): 从季度中添加剧集。ep_id: {ep.Id}, 标题: '{ep.Title}', CID: {ep.CId}, AID: {ep.AId}");
                             string episodeIdentifier = ep.Id.ToString();
                             log.Info($"Bilibili.GetMedia (Season ID: {id}): 创建 ScraperEpisode。使用 ep_id '{episodeIdentifier}' 作为 Id 和 CommentId。原始剧集标题: '{ep.Title}'");
